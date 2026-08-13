@@ -3340,6 +3340,53 @@ function updateCards(progress) {
 
 
     /* =====================================================
+       헤더 메뉴 이동
+       헤더 버튼 기능 전용
+       ===================================================== */
+
+    const headerNavLinks =
+        document.querySelectorAll(".header-nav a");
+
+    headerNavLinks.forEach(function(link) {
+
+        link.addEventListener("click", function(event) {
+
+            event.preventDefault();
+
+            const targetId =
+                link.getAttribute("href");
+
+            const target =
+                document.querySelector(targetId);
+
+            if (!target) {
+                return;
+            }
+
+            const header =
+                document.getElementById("top-bar");
+
+            const headerHeight =
+                header
+                    ? header.offsetHeight
+                    : 76;
+
+            const targetTop =
+                target.getBoundingClientRect().top
+                + window.scrollY
+                - headerHeight;
+
+            window.scrollTo({
+                top: targetTop,
+                behavior: "smooth"
+            });
+
+        });
+
+    });
+
+
+    /* =====================================================
        초기화
     ===================================================== */
 
@@ -3349,6 +3396,7 @@ function updateCards(progress) {
 
 
 })();
+
 
 </script>
 
